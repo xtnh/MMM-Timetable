@@ -176,12 +176,12 @@ Module.register("MMM-Timetable", {
     var validItem = {}
     var tlItem = new Set()
     var maxTl = null
+
     for(var i in schedule.schedule) {
       var item = schedule.schedule[i]
       if (maxTl <= item[2]) {
         maxTl = item[2]
       }
-
       if (this.config.mode == 'today') {
         if (item[0] == this.today || item[0] == 0) {
           if(typeof validItem[item[0]] == "undefined") {
@@ -214,8 +214,8 @@ Module.register("MMM-Timetable", {
           tlItem.add(item[2])
         }
       }
-      tlItem.add(maxTl)
     }
+    tlItem.add(maxTl)
     var tl = Array.from(tlItem).sort()
     var start = convertTime(tl.shift())
     var end = convertTime(tl.pop())
