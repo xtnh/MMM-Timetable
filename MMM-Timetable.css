@@ -45,7 +45,7 @@
 }
 
 #TTABLE #TTABLE_TIMELINE {
-  width:50px;
+  width:80px;
   border-right:1px solid #FFF;
   height:100%;
   position:relative;
@@ -67,7 +67,7 @@
 }
 #TTABLE_TIMELINE .time {
   padding-right:5px;
-  width:40px;
+  width:70px;
   position:absolute;
   top:0;
   font-size: 12px;
