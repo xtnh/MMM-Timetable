@@ -32,7 +32,7 @@
   height:30px;
   padding: 0;
   margin: 0;
-  font-size: 20px;
+  font-size: 14px;
   border-bottom: 2px solid #FFF;
   text-align: center;
   line-height: 100%;
@@ -45,7 +45,7 @@
 }
 
 #TTABLE #TTABLE_TIMELINE {
-  width:80px;
+  width:50px;
   border-right:1px solid #FFF;
   height:100%;
   position:relative;
@@ -67,10 +67,10 @@
 }
 #TTABLE_TIMELINE .time {
   padding-right:5px;
-  width:70px;
+  width:40px;
   position:absolute;
   top:0;
-  font-size: 18px;
+  font-size: 12px;
   font-weight: bold;
   line-height:100%;
   border-top:1px dotted #999;
@@ -79,13 +79,14 @@
 #TTABLE .column .item {
   position:absolute;
   top:0;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: bold;
   border:1px solid #FFF;
   background-color:rgba(255,255,255,0.3);
   border-radius:4px;
   box-sizing:border-box;
-  text-align:left;
+  text-align:center;
+  vertical-align:middle;
   padding:3px;
   overflow:hidden;
 }
@@ -113,4 +114,8 @@
 
 #TTABLE .column .item.isnow {
   border:3px solid #FF0;
+}
+
+#TTABLE_TILE {
+  font-size: 20px;
 }

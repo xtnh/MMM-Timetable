@@ -278,11 +278,7 @@ Module.register("MMM-Timetable", {
         var subtitle = document.createElement("p")
         subtitle.className = "subtitle"
         subtitle.innerHTML = item[4]
-        var period = document.createElement("p")
-        period.className = "period"
-        period.innerHTML = timeFormat(item[1], this.config.timeFormat) + " - " + timeFormat(item[2], this.config.timeFormat)
         elm.appendChild(title)
-        elm.appendChild(period)
         elm.appendChild(subtitle)
         day.appendChild(elm)
       }
