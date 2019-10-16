@@ -27,7 +27,8 @@ Module.register("MMM-Timetable", {
     schedules: [ //array of schedules
       {
         title: "Slytherin 2nd Year",
-        file:null,
+        file_W1:null,
+	file_W2:null,
         schedule: [
           // [weekday, starttime(24h), endtime(24h), title, subtitle, backgroundColor(optional)]
           // weekday : 1 for Monday, 2 for Tuesday, ... 7 for Sunday
@@ -149,7 +150,12 @@ Module.register("MMM-Timetable", {
   },
 
   drawSchedule: function(schedule) {
-    document.getElementById("TTABLE_TITLE").innerHTML = schedule.title
+    var now = moment();
+    var noWeek = now.week();
+    if (this.today > 5) noWeek++;
+
+    document.getElementById("TTABLE_TITLE").innerHTML = "Emploi Du Temps Semaine " + noWeek + " (" + schedule.title + ")"
+    //document.getElementById("TTABLE_TITLE").innerHTML = schedule.title
     var dayFilter = {
       "today" : [this.today],
       "5days" : [1,2,3,4,5],
@@ -279,10 +285,10 @@ Module.register("MMM-Timetable", {
         subtitle.className = "subtitle"
         subtitle.innerHTML = item[4]
         var period = document.createElement("p")
-        period.className = "period"
-        period.innerHTML = timeFormat(item[1], this.config.timeFormat) + " - " + timeFormat(item[2], this.config.timeFormat)
+        //period.className = "period"
+        //period.innerHTML = timeFormat(item[1], this.config.timeFormat) + " - " + timeFormat(item[2], this.config.timeFormat)
         elm.appendChild(title)
-        elm.appendChild(period)
+        //elm.appendChild(period)
         elm.appendChild(subtitle)
         day.appendChild(elm)
       }
@@ -302,14 +308,39 @@ Module.register("MMM-Timetable", {
         this.drawSchedule(schedule)
       }
     }
-    if (schedule.file) {
-      this.readCSV(schedule.file, schedule, draw)
+    if (schedule.file_W1) {
+	var now = moment();
+	var noWeek = now.week();
+
+	if (this.today > 5) noWeek++;
+
+	if(schedule.file_W2 && this.Impair(noWeek)) {
+		//console.log("INFO : Semaine impair -- " + noWeek);
+		this.readCSV(schedule.file_W2, schedule, draw)
+    	} else {
+		//console.log("INFO : Semaine pair -- " + noWeek);
+		this.readCSV(schedule.file_W1, schedule, draw)
+    	}
     } else {
       draw(schedule)
     }
   },
 
+  Impair : function (semaine){
+	semaine=parseInt(semaine);
+	return ((semaine & 1)=='0')?false:true;
+  },
+
   readCSV: function (file, schedule, callback) {
+    //var now = moment();
+    //var noWeek = now.week();
+    //if (this.Impair(noWeek)) {
+    //	console.log("INFO : Semaine impair -- " + noWeek);
+    //	var url = "/modules/MMM-Timetable/" + file + "1.csv"
+    //} else {
+   //	console.log("INFO : Semaine pair -- " + noWeek);
+	//var url = "/modules/MMM-Timetable/" + file + "0.csv"
+    //}
     var url = "/modules/MMM-Timetable/" + file
     var xmlHttp = new XMLHttpRequest()
     xmlHttp.onreadystatechange = () => {
