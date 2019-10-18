@@ -332,7 +332,7 @@ Module.register("MMM-Timetable", {
     }
     if (schedule.file_W1) {
 	var now = moment();
-	var noWeek = 1; //now.week();
+	var noWeek = now.week();
 
 	if (this.today > 5) noWeek++;
 
