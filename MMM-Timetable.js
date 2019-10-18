@@ -138,7 +138,6 @@ Module.register("MMM-Timetable", {
   },
 
   draw: function(payload) {
-    if (this.config.refreshInterval !=0) var timer = setTimeout(()=>{ this.draw(); }, this.config.refreshInterval) // refresh timer if refreshInval != false
     if (payload) { // si payload ...
 	for (var i = 0; i < this.config.schedules.length; i++) { // boucle sur tous les schedules
 		if (this.config.schedules[i].title == payload) { // recherche match sur le payload
@@ -152,6 +151,21 @@ Module.register("MMM-Timetable", {
     if (this.index >= this.config.schedules.length) { // if every schedules was read -> return to the first
 	this.index = 0
     }
+    if (this.config.refreshInterval !=0) this.resetTimer();
+  },
+
+  resetTimer: function() {
+	var self = this;
+	clearInterval(self.interval);
+	self.counter = this.config.refreshInterval;
+
+	self.interval = setInterval(function() {
+		self.counter -=1000;
+		if (self.counter <= 0) {
+			clearInterval(self.interval);
+			self.draw();
+		}
+	},1000);
   },
 
   drawSchedule: function(schedule) {
@@ -318,7 +332,7 @@ Module.register("MMM-Timetable", {
     }
     if (schedule.file_W1) {
 	var now = moment();
-	var noWeek = now.week();
+	var noWeek = 1; //now.week();
 
 	if (this.today > 5) noWeek++;
 
