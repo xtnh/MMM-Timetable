@@ -25,6 +25,7 @@ Module.register("MMM-Timetable", {
     refreshInterval: 1000*10,
     displayEndTime: false,
     displayPeriod: true,
+    title: null,
     schedules: [ //array of schedules
       {
         title: "Slytherin 2nd Year",
@@ -171,9 +172,12 @@ Module.register("MMM-Timetable", {
   drawSchedule: function(schedule) {
     var now = moment();
     var noWeek = now.week();
-    if (this.today > 5) noWeek++;
+    var fullTitle;
+    if (this.config.mode == '5days' && this.today > 5) noWeek++; // announces next week's schedule
+    if (this.config.title) fullTitle = this.config.title + " " + noWeek + " - " + schedule.title // personalized title
+    else fullTitle = schedule.title; // eouia Default
 
-    document.getElementById("TTABLE_TITLE").innerHTML = "Emploi Du Temps Semaine " + noWeek + " (" + schedule.title + ")"
+    document.getElementById("TTABLE_TITLE").innerHTML = fullTitle;
     var dayFilter = {
       "today" : [this.today],
       "5days" : [1,2,3,4,5],
@@ -334,7 +338,7 @@ Module.register("MMM-Timetable", {
 	var now = moment();
 	var noWeek = now.week();
 
-	if (this.today > 5) noWeek++;
+	if (this.config.mode == '5days' && this.today > 5) noWeek++;
 
 	if(schedule.file_W2 && this.Impair(noWeek)) {
 		//console.log("INFO : Semaine impair -- " + noWeek);
