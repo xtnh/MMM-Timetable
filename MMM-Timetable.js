@@ -139,6 +139,7 @@ Module.register("MMM-Timetable", {
   },
 
   draw: function(payload) {
+    this.today = moment().isoWeekday();
     if (payload) { // si payload ...
 	for (var i = 0; i < this.config.schedules.length; i++) { // boucle sur tous les schedules
 		if (this.config.schedules[i].title == payload) { // recherche match sur le payload
