@@ -26,16 +26,12 @@ git clone https://github.com/eouia/MMM-Timetable.git
     height: "800px",
     width: "150px",
     mode: "5days", // "today", "5days", "7days"
-    refreshInterval: 1000*60, // Set to 0 to disable
+    refreshInterval: 1000*60,
     displayEndTime:true, //whether display endTime on timeline or not.
-    displayPeriod:true, // Display time period inside in the schedule
-    title: null, // Personalized title ex: "Schedule Week" display -> Schedule Week 'week number' - Slytherin 2nd Year
     schedules: [ //array of schedules
       {
         title: "Slytherin 2nd Year",
-        // or "test.csv" - comma separated text file. (see `test.csv`)
-        file_W1: null, // CSV File for even week
-        file_W2: null, // CSV File for odd week
+        file: null, // or "test.csv" - comma separated text file. (see `test.csv`)
         schedule: [
           // [weekday, starttime(24h), endtime(24h), title, subtitle, backgroundColor(optional)]
           // weekday : 1 for Monday, 2 for Tuesday, ... 7 for Sunday
@@ -89,6 +85,3 @@ git clone https://github.com/eouia/MMM-Timetable.git
 
 3. Warning.
 When you use CSV(comma separated), check time format. use "0900" instead "900".
-
-4. Notification.
-You can force schedule display title : use `this.sendNotification("TIMETABLE_CALL", "YOUR_SCHEDULE_TITLE");`
